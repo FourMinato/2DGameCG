@@ -273,6 +273,20 @@ public class Robot implements GLEventListener {
     public void togglePause() {
         isPaused = !isPaused;
         System.out.println("Paused: " + isPaused);
+
+        if (isPaused) {
+            // Stop the background music when the game is paused
+            if (gameMusic != null && gameMusic.isRunning()) {
+                gameMusic.stop();
+            }
+        } else {
+            // Resume the background music when the game is unpaused
+            if (gameMusic != null && !gameMusic.isRunning()) {
+                gameMusic.setFramePosition(0);
+                gameMusic.loop(Clip.LOOP_CONTINUOUSLY);
+                gameMusic.start();
+            }
+        }
     }
 
     private void restartGame() {
@@ -929,8 +943,30 @@ public class Robot implements GLEventListener {
         if (textRenderer != null)
             textRenderer.dispose();
 
-        if (gameMusic != null && gameMusic.isRunning()) {
-            gameMusic.stop();
+        // Stop and close the game music to prevent sound overlap
+        if (gameMusic != null) {
+            if (gameMusic.isRunning()) {
+                gameMusic.stop();
+            }
+            gameMusic.close();
+        }
+
+        // Stop and close other sounds to ensure they are properly disposed
+        if (winSound != null) {
+            winSound.stop();
+            winSound.close();
+        }
+        if (loseSound != null) {
+            loseSound.stop();
+            loseSound.close();
+        }
+        if (itemCollectSound != null) {
+            itemCollectSound.stop();
+            itemCollectSound.close();
+        }
+        if (damageSound != null) {
+            damageSound.stop();
+            damageSound.close();
         }
     }
 
