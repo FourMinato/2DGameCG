@@ -23,8 +23,8 @@ public class Item {
 
     private static final int[][][] LEVEL_ITEM_POSITIONS = {
         {{5, 2}}, // Level 1 - 1 item
-        {{3, 5}, {5, 3}}, // Level 2 - 2 items
-        {{7, 7}, {3, 5}, {5, 2}} // Level 3 - 3 items
+        {{3, 5}, {8, 9}}, // Level 2 - 2 items
+        {{11, 7}, {3, 9}, {7, 2}} // Level 3 - 3 items
     };
 
     public Item(int level, int itemIndex) {
